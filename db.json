@@ -1,0 +1,36 @@
+{
+  "gifts": [
+    {
+      "id": 1,
+      "name": "Hot Wheels Super Death Loop"
+    },
+    {
+      "id": 2,
+      "name": "Super Death Loop Lego Set"
+    },
+    {
+      "id": 3,
+      "name": "Hot Wheels Super Life Loop"
+    },
+    {
+      "id": 4,
+      "name": "Cardboard Cutout of Robin Williams"
+    },
+    {
+      "id": 5,
+      "name": "Classic Barbie Doll"
+    },
+    {
+      "id": 6,
+      "name": "Super Death Barbie"
+    },
+    {
+      "id": 7,
+      "name": "Lego Normandy"
+    },
+    {
+      "name": "Super Death My Little Pony",
+      "id": 8
+    }
+  ]
+}

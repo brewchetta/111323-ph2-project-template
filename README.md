@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Project Setup Steps w/ React Router
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
 
-## Available Scripts
+To create your repo first run `npx create-react-app project-name` substituting `project-name` with your project's name (you can always change this later).
 
-In the project directory, you can run:
+After everything's done installing you can `cd project-name` and open it with `code .` to see your files.
 
-### `npm start`
+## What Can you Delete?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can delete a lot of the boilerplate files from the project `src` if you want:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `setupTests.js`
+- `App.test.js`
+- `reportWebVitals.js`
+- `App.css` (you can write all your css in the index.css if you want)
 
-### `npm test`
+If you delete these files then you'll also need to delete anything related to `reportWebVitals` from the `index.js` and the line `"test": "react-scripts test"` from the `package.json`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Architect Your App
 
-### `npm run build`
+I often create a new `components` folder in `src` and move `App.js` into it. From there you can add any and all components into your `components` folder.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+One thing I'd recommend is to create a sub-directory for each router page. For example, if you're making a gift giving app and you have three or four components for the `NewGift.js` page you should put them all in a `NewGift` folder/directory.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This is only one way of architecting your app, there are many others...
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setting Up React Router
 
-### `npm run eject`
+To begin, inside your project terminal run `npm install react-router-dom`. After a brief install you should be able to see your new package in `package.json`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+It's good practice to create a `routes.js` file in your `src` which controls all your routes. An example of your routes might look like the one in this project. Be sure to export it.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Import the routes in `index.js` along with `RouterProvider` and `createBrowserRouter` from `react-router-dom`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Below the imports your create your router with code that looks like this:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+import routes from './routes'
 
-## Learn More
+const router = createBrowserRouter(routes)
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Remove the code inside `root.render` and replace it with your `RouterProvider` so it looks like this:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+root.render( <RouterProvider router={router} /> );
+```
 
-### Code Splitting
+## Adding a `db.json`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Create a `db.json` at the top level of your project. Use the code below as a template:
 
-### Analyzing the Bundle Size
+```json
+{
+    "whatever": [
+        {
+            "id": 1,
+            "name": "Something"
+        },
+        {
+            "id": 2,
+            "name": "Something else"
+        }
+    ]
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Replace `"whatever"` with the name of your resource (for example an app about gifts might call it `"gifts"`) and shape your data to your liking.
 
-### Making a Progressive Web App
+Inside your `package.json` add a new line in `scripts` to make it easy to run your server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```json
+"server": "json-server --watch db.json -p 8000"
+```
 
-### Advanced Configuration
+You can replace `-p 8000` with whichever port you want for your fetch requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This will allow you to run your `db.json` using the command `npm run server`.
 
-### Deployment
+## Finishing Up
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+From here you should be able to build out the rest of your project. Because `create-react-app` makes this a repo, you should be able to go to github and use the `upload an existing project` directions to upload it.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Good luck and have fun!
